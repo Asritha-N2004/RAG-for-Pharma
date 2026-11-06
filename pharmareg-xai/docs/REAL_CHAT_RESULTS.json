@@ -1,0 +1,85 @@
+{
+  "real_model": "llama3.2:1b",
+  "validated_turns": 2,
+  "responses": [
+    {
+      "answer": "The Quality Assurance manager retains signed training records.",
+      "citations": [
+        "a36a554f-7f7a-4472-b8c8-8f6a4d2ace68"
+      ],
+      "claims": [
+        {
+          "text": "The Quality Assurance manager retains signed training records.",
+          "chunk_id": "a36a554f-7f7a-4472-b8c8-8f6a4d2ace68",
+          "quote": "DEMONSTRATION DATA"
+        },
+        {
+          "text": "Operators receive training before operating equipment.",
+          "chunk_id": "a36a554f-7f7a-4472-b8c8-8f6a4d2ace68",
+          "quote": "DEMONSTRATION DATA"
+        }
+      ],
+      "limitations": [
+        "Insufficient evidence",
+        "Quote membership is not semantic entailment; qualified review is required."
+      ],
+      "provider": "local-openai",
+      "evidence": [
+        {
+          "chunk_id": "a36a554f-7f7a-4472-b8c8-8f6a4d2ace68",
+          "document_id": "d04d681d-8129-4df4-a4d6-86bc1b884b8f",
+          "document_version_id": "d04d681d-8129-4df4-a4d6-86bc1b884b8f",
+          "document_title": "DEMONSTRATION-training.txt",
+          "version": "1",
+          "page": null,
+          "section": "",
+          "text": "DEMONSTRATION DATA\nThe Quality Assurance manager retains signed training records.\nOperators receive training before operating equipment.",
+          "authority": "User supplied",
+          "jurisdiction": "Unspecified",
+          "source_url": "",
+          "checksum": "1fa7067d1af598d6534bc6d4b4c203e9ce9aec4baf43a2d36374d5002569074c",
+          "retrieval_score": 0.03278688524590164,
+          "dense_score": 0.42163702135578396,
+          "keyword_score": -1.2163207481682639
+        }
+      ]
+    },
+    {
+      "answer": "Operators receive training before operating equipment.",
+      "citations": [
+        "a36a554f-7f7a-4472-b8c8-8f6a4d2ace68"
+      ],
+      "claims": [
+        {
+          "text": "Operators receive training before operating equipment.",
+          "chunk_id": "a36a554f-7f7a-4472-b8c8-8f6a4d2ace68",
+          "quote": "Operators receive training before operating equipment."
+        }
+      ],
+      "limitations": [
+        "Insufficient evidence",
+        "Quote membership is not semantic entailment; qualified review is required."
+      ],
+      "provider": "local-openai",
+      "evidence": [
+        {
+          "chunk_id": "a36a554f-7f7a-4472-b8c8-8f6a4d2ace68",
+          "document_id": "d04d681d-8129-4df4-a4d6-86bc1b884b8f",
+          "document_version_id": "d04d681d-8129-4df4-a4d6-86bc1b884b8f",
+          "document_title": "DEMONSTRATION-training.txt",
+          "version": "1",
+          "page": null,
+          "section": "",
+          "text": "DEMONSTRATION DATA\nThe Quality Assurance manager retains signed training records.\nOperators receive training before operating equipment.",
+          "authority": "User supplied",
+          "jurisdiction": "Unspecified",
+          "source_url": "",
+          "checksum": "1fa7067d1af598d6534bc6d4b4c203e9ce9aec4baf43a2d36374d5002569074c",
+          "retrieval_score": 0.03278688524590164,
+          "dense_score": 0.5270462766947299,
+          "keyword_score": -0.9416676760012366
+        }
+      ]
+    }
+  ]
+}

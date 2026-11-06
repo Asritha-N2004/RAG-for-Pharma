@@ -1,0 +1,151 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\N.ASRITHAREDDY\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "cloud-capa.spec.js",
+      "--workers=1",
+      "--reporter=list,json"
+    ],
+    "configFile": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\playwright.config.js",
+    "rootDir": "C:/Users/N.ASRITHAREDDY/OneDrive/Desktop/Documents/ChatGPT/RAG for Pharma 2/pharmareg-xai/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/N.ASRITHAREDDY/OneDrive/Desktop/Documents/ChatGPT/RAG for Pharma 2/pharmareg-xai/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/N.ASRITHAREDDY/OneDrive/Desktop/Documents/ChatGPT/RAG for Pharma 2/pharmareg-xai/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\e2e",
+        "snapshotDir": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 240000,
+        "use": {
+          "actionTimeout": 30000,
+          "baseURL": "https://pharmareg-xai.vercel.app",
+          "headless": true,
+          "launchOptions": {
+            "executablePath": "C:/Program Files/Google/Chrome/Application/chrome.exe"
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "cloud-capa.spec.js",
+      "file": "cloud-capa.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "cloud PostgreSQL CAPA verification, independent closure and report recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 57492,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T17:13:22.761Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "857664f294924f654efc-cb60dd190acefd93552b",
+          "file": "cloud-capa.spec.js",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T17:13:22.236Z",
+    "duration": 58593.189,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "storage": "Vercel private Blob",
+  "authenticated_encryption": "AES-256-GCM",
+  "local_original_removed": true,
+  "private_upload_download_roundtrip": true,
+  "test_blob_removed": true
+}

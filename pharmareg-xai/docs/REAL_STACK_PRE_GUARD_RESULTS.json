@@ -1,0 +1,39 @@
+{
+  "authentic_pdf": {
+    "pages": 58,
+    "chunks": 163,
+    "embedding_dimension": 384,
+    "checksum": "5fd51870f00d2bb44d6a9dbdce859a96809f5f2b491710ba1039c52e131f4520"
+  },
+  "hybrid_retrieval": {
+    "sources": 2,
+    "score": 0.03252247488101534,
+    "dense_score": 0.17433327436447144
+  },
+  "cross_encoder_reranking": {
+    "returned": 2,
+    "model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  },
+  "real_llm": {
+    "model": "llama3.2:3b",
+    "status": "NON_COMPLIANT",
+    "citations": [
+      "39cded31-483e-4e9d-bbe2-c9a82e7213f3"
+    ],
+    "explanation": "The requirement is non-compliant because the evidence does not provide any information on the adequacy of the personnel or the appropriateness of their education and training."
+  },
+  "risk_and_capa": {
+    "score": 18,
+    "capa_id": "e202c19b-2d40-4d5b-af42-ae7742859888",
+    "closure": "independent reviewer",
+    "attachment_id": "43c8cc7e-a5d8-43b7-bec5-69f2e69e8935"
+  },
+  "reports": {
+    "pdf": 20545,
+    "docx": 42103,
+    "csv": 4346
+  },
+  "reindex_preserves_citations": true,
+  "audit_sealed_records": 22,
+  "elapsed_seconds": 166.51639049999358
+}

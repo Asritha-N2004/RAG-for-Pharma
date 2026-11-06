@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "database": "actual Neon PostgreSQL",
+  "concurrent_child_and_audit_transactions": 2,
+  "audit_chain_valid": true,
+  "lock": "FOR NO KEY UPDATE",
+  "fixture_organization_id": "022b4667-e3a5-4dcc-b28b-0d097607fae8"
+}

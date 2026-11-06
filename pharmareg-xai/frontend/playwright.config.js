@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./e2e',expect:{timeout:Number(process.env.E2E_EXPECT_TIMEOUT_MS||5000)},timeout:Number(process.env.E2E_TIMEOUT_MS||120000),use:{actionTimeout:Number(process.env.E2E_ACTION_TIMEOUT_MS||0),baseURL:process.env.APP_URL||'http://127.0.0.1:8010',headless:true,launchOptions:process.env.CHROMIUM_EXECUTABLE?{executablePath:process.env.CHROMIUM_EXECUTABLE}:{},viewport:{width:1440,height:1000}},reporter:'list'});

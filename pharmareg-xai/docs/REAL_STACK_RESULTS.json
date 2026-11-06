@@ -1,0 +1,58 @@
+{
+  "authentic_pdf": {
+    "pages": 58,
+    "chunks": 176,
+    "embedding_dimension": 384,
+    "checksum": "5fd51870f00d2bb44d6a9dbdce859a96809f5f2b491710ba1039c52e131f4520"
+  },
+  "hybrid_retrieval": {
+    "sources": 2,
+    "score": 0.03252247488101534,
+    "dense_score": 0.12243306636810303
+  },
+  "cross_encoder_reranking": {
+    "returned": 2,
+    "model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  },
+  "real_llm": {
+    "model": "llama3.2:1b",
+    "status": "INSUFFICIENT_EVIDENCE",
+    "model_proposed_status": "NON_COMPLIANT",
+    "validation_limitations": [
+      "Missing documented evidence does not establish an operational violation"
+    ],
+    "citations": [
+      "3252c831-7d73-4503-b89a-14a9fac61130",
+      "3252c831-7d73-4503-b89a-14a9fac61130"
+    ],
+    "explanation": "Grounding policy withheld the proposed classification: Missing documented evidence does not establish an operational violation. Model rationale: The provided evidence does not establish a clear understanding of the training requirements and their implementation. The quotes provided do not establish a clear compliance with the training requirements. The evidence does not demonstrate that the training is periodically assessed, which is a critical aspect of compliance. The quotes also do not establish a clear understanding of the training's effectiveness or the retention of signed training records. The evidence is incomplete and does not provide sufficient evidence to demonstrate compliance with the training requirements.",
+    "generation": {
+      "model": "llama3.2:1b",
+      "attempts": 2,
+      "last_response_latency_ms": 48286.05840000091,
+      "usage": {
+        "prompt_tokens": 1476,
+        "prompt_tokens_details": {
+          "cached_tokens": 983
+        },
+        "completion_tokens": 467,
+        "total_tokens": 1943
+      }
+    },
+    "validation_status": "VALIDATED_STRUCTURE_AND_QUOTES"
+  },
+  "risk_and_capa": {
+    "score": 18,
+    "capa_id": "d989a938-37d8-4d75-b9e8-a5e43a179a34",
+    "closure": "independent reviewer",
+    "attachment_id": "77d48a62-048b-42cf-b15c-c4030ab41861"
+  },
+  "reports": {
+    "pdf": 24764,
+    "docx": 42956,
+    "csv": 5526
+  },
+  "reindex_preserves_citations": true,
+  "audit_sealed_records": 22,
+  "elapsed_seconds": 135.50962620000064
+}

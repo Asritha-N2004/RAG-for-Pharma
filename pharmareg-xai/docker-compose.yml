@@ -1,0 +1,119 @@
+services:
+  postgres:
+    image: postgres:16.9-alpine
+    environment:
+      POSTGRES_DB: pharmareg
+      POSTGRES_USER: pharmareg
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pharmareg"]
+      interval: 5s
+      retries: 20
+    networks: [internal]
+  redis:
+    image: redis:7.4.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: ["redis_data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 20
+    networks: [internal]
+  chroma:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.chroma
+    command: ["chroma", "run", "--host", "0.0.0.0", "--port", "8000", "--path", "/data/chroma"]
+    volumes: ["chroma_data:/data"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v2/heartbeat')"]
+      interval: 10s
+      retries: 20
+    networks: [internal]
+  backend:
+    build:
+      context: ./backend
+      args: {INSTALL_ML: "${INSTALL_ML:-true}", INSTALL_VECTOR: "${INSTALL_VECTOR:-true}"}
+    environment: &runtime
+      APP_ENV: ${APP_ENV:-development}
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+      DATABASE_URL: postgresql+psycopg://pharmareg:${POSTGRES_PASSWORD}@postgres:5432/pharmareg
+      STORAGE_DIR: /data
+      LLM_PROVIDER: ${LLM_PROVIDER:-local-extractive}
+      ALLOW_EXTERNAL_LLM: ${ALLOW_EXTERNAL_LLM:-false}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      CHROMA_HOST: chroma
+      CHROMA_PORT: 8000
+      REDIS_URL: redis://redis:6379/0
+      REDIS_REQUIRED: "true"
+      JOB_MODE: worker
+      VECTOR_STORE: ${VECTOR_STORE:-chroma}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-sentence-transformers}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
+      RERANKER_MODEL: ${RERANKER_MODEL:-cross-encoder/ms-marco-MiniLM-L-6-v2}
+      HF_HOME: /data/models
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-}
+      ENCRYPT_STORAGE: ${ENCRYPT_STORAGE:-false}
+      STORAGE_ENCRYPTION_KEY: ${STORAGE_ENCRYPTION_KEY:-}
+      AUDIT_HMAC_KEY: ${AUDIT_HMAC_KEY:-}
+      SIGNATURE_HMAC_KEY: ${SIGNATURE_HMAC_KEY:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MALWARE_SCANNER_COMMAND: ${MALWARE_SCANNER_COMMAND:-}
+      REQUIRE_MALWARE_SCAN: ${REQUIRE_MALWARE_SCAN:-false}
+      OIDC_ISSUER: ${OIDC_ISSUER:-}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI:-}
+    volumes: ["uploads:/data"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      chroma: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      retries: 10
+    networks: [internal]
+  worker:
+    build:
+      context: ./backend
+      args: {INSTALL_ML: "${INSTALL_ML:-true}", INSTALL_VECTOR: "${INSTALL_VECTOR:-true}"}
+    command: ["python", "-m", "app.workers.worker"]
+    environment: *runtime
+    volumes: ["uploads:/data"]
+    depends_on:
+      backend: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import pathlib,tempfile,time; p=pathlib.Path(tempfile.gettempdir())/'pharmareg-worker-heartbeat'; assert p.exists() and time.time()-p.stat().st_mtime<300"]
+      interval: 30s
+      retries: 3
+    networks: [internal]
+  ollama:
+    image: ollama/ollama:0.11.4
+    profiles: [local-ai]
+    volumes: ["ollama_models:/root/.ollama"]
+    networks: [internal]
+  frontend:
+    build: ./frontend
+    ports: ["${FRONTEND_BIND:-127.0.0.1}:${FRONTEND_PORT:-8080}:80"]
+    depends_on:
+      backend: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 10s
+      retries: 10
+    networks: [internal]
+volumes:
+  postgres_data:
+  redis_data:
+  chroma_data:
+  uploads:
+  ollama_models:
+networks:
+  internal:

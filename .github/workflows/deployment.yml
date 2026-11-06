@@ -1,0 +1,39 @@
+name: Deployment acceptance
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: pharmareg-xai
+    env:
+      POSTGRES_PASSWORD: ci-only-fixture-password-123
+      SECRET_KEY: ci-only-secret-key-at-least-48-characters-fixture
+      INSTALL_ML: 'false'
+      INSTALL_VECTOR: 'true'
+      EMBEDDING_PROVIDER: hash-local
+      VECTOR_STORE: chroma
+      ENCRYPT_STORAGE: 'true'
+      STORAGE_ENCRYPTION_KEY: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install httpx==0.28.1
+      - run: docker compose up --build -d --wait --wait-timeout 600
+      - run: python scripts/verify_deployment.py --require-services
+      - name: Verify worker restart and persistence
+        run: |
+          docker compose restart worker backend
+          docker compose up -d --wait --wait-timeout 180
+          python scripts/verify_deployment.py --require-services --output docs/DEPLOYMENT_RESTART_RESULTS.json
+      - if: always()
+        run: docker compose logs --no-color > docs/compose.log
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-evidence
+          path: pharmareg-xai/docs/*RESULTS.json
+      - if: always()
+        run: docker compose down -v

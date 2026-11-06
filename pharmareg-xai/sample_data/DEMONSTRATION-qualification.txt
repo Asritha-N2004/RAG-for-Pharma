@@ -1,0 +1,3 @@
+DEMONSTRATION DATA — SYNTHETIC, NOT OFFICIAL REGULATORY TEXT
+1 Qualification
+The engineering team documents installation, operation, and performance qualification. QA reviews acceptance criteria and approves qualification records.

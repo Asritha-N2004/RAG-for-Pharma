@@ -1,0 +1,25 @@
+{
+  "url": "http://127.0.0.1:8027",
+  "provider": "local-openai",
+  "model": "llama3.2:1b",
+  "embedding_provider": "sentence-transformers",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "finding_status": "INSUFFICIENT_EVIDENCE",
+  "validation_status": "VALIDATED_STRUCTURE_AND_QUOTES",
+  "model_proposed_status": "NON_COMPLIANT",
+  "processing_jobs": [
+    [
+      "document",
+      "SUCCEEDED"
+    ],
+    [
+      "document",
+      "SUCCEEDED"
+    ],
+    [
+      "assessment",
+      "SUCCEEDED"
+    ]
+  ],
+  "migration": "0004"
+}

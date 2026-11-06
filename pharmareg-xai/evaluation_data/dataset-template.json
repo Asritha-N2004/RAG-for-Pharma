@@ -1,0 +1,8 @@
+{
+  "description": "Annotation template only. Replace identifiers with actual source chunk UUIDs and obtain independent expert review before reporting research metrics.",
+  "annotation_status": "UNREVIEWED_TEMPLATE",
+  "k": 5,
+  "cases": [
+    {"query": "What training records are retained?", "relevant_chunk_ids": [], "expected_classification": "INSUFFICIENT_EVIDENCE", "reviewer": null}
+  ]
+}

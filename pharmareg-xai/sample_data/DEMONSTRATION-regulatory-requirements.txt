@@ -1,0 +1,6 @@
+DEMONSTRATION DATA — SYNTHETIC, NOT OFFICIAL REGULATORY TEXT
+1 Training
+Personnel must receive role-specific training before operating equipment.
+Training effectiveness should be evaluated.
+2 Validation
+Equipment qualification records must identify the equipment, acceptance criteria, execution results, and approval.

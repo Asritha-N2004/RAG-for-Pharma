@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "url": "https://localhost:8043",
+  "readiness": {
+    "checks": {
+      "database": {
+        "status": "VERIFIED",
+        "engine": "sqlite"
+      },
+      "redis": {
+        "status": "NOT_CONFIGURED",
+        "alternative": "Durable SQL queue and local rate limits"
+      },
+      "vector_store": {
+        "status": "VERIFIED",
+        "mode": "SQL-backed vectors"
+      },
+      "file_encryption": {
+        "status": "CONFIGURED",
+        "scope": "Original documents, CAPA attachments and generated report files; database-volume encryption remains an infrastructure control."
+      },
+      "smtp": {
+        "status": "NOT_CONFIGURED",
+        "note": "No test message is sent by this check."
+      },
+      "malware_scanner": {
+        "status": "NOT_CONFIGURED",
+        "required": false
+      },
+      "https": {
+        "status": "VERIFIED",
+        "note": "External TLS termination must be verified from the public deployment endpoint."
+      },
+      "oidc": {
+        "status": "NOT_CONFIGURED"
+      },
+      "domain_and_regulatory_validation": {
+        "status": "HUMAN_REVIEW_REQUIRED",
+        "note": "Use the release validation page to record qualified evidence and sign-off. Automated service checks do not certify legal or regulatory suitability."
+      }
+    },
+    "service_failures": [],
+    "production_certified": false
+  },
+  "assessment_id": "d9b5b06e-1c9f-4bee-86f8-35902c0b2c03",
+  "findings": 1,
+  "reports": {
+    "pdf": 16316,
+    "docx": 40845,
+    "csv": 2739
+  },
+  "notes": "Synthetic workflow fixture; no domain accuracy or certification claim."
+}

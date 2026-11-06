@@ -1,0 +1,9 @@
+import React,{useState} from 'react';
+import {useQuery} from '@tanstack/react-query';
+import {api} from '../services/api';
+import {Panel,Field,Empty} from '../components/ui';
+export default function Analytics(){
+ const [filters,setFilters]=useState({authority:'',department:'',since:'',until:''});const query=new URLSearchParams(Object.entries(filters).filter(([,v])=>v)).toString();const {data}=useQuery({queryKey:['/dashboard/analytics?'+query],queryFn:async()=>(await api.get('/dashboard/analytics?'+query)).data});
+ return <Panel title="Workspace analytics"><div className="form-grid">{Object.keys(filters).map(k=><Field label={'Filter '+k} key={k}><input type={['since','until'].includes(k)?'date':'text'} value={filters[k]} onChange={e=>setFilters({...filters,[k]:e.target.value})}/></Field>)}</div>{data&&<><div className="grid two">{['authority_distribution','department_distribution','document_processing','capa_status','assessment_trend'].map(k=><div key={k}><h3>{k.replaceAll('_',' ')}</h3>{Object.entries(data[k]).length?<table><tbody>{Object.entries(data[k]).map(([label,n])=><tr key={label}><td>{label}</td><td>{n}</td></tr>)}</tbody></table>:<p className="muted">No matching records</p>}</div>)}</div><h3>Overdue corrective actions</h3>{data.overdue_capas.length?data.overdue_capas.map(c=><p key={c.id}>{c.title} · due {c.data.due_date}</p>):<Empty>No overdue CAPAs in this filter scope.</Empty>}</>}</Panel>;
+}
+export function AuditIntegrity(){const {data}=useQuery({queryKey:['/audit-logs/verify'],queryFn:async()=>(await api.get('/audit-logs/verify')).data});return data?<Panel title="Audit integrity verification"><p>{data.valid?'Sealed records verified':'Integrity verification failed'} · {data.sealed_records} HMAC-sealed records · {data.legacy_unsealed_records} legacy records</p><code>Checkpoint {data.checkpoint}</code><p className="muted">{data.limitation}</p></Panel>:null;}

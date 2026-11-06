@@ -1,0 +1,180 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\N.ASRITHAREDDY\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\playwright.config.js",
+    "rootDir": "C:/Users/N.ASRITHAREDDY/OneDrive/Desktop/Documents/ChatGPT/RAG for Pharma 2/pharmareg-xai/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/N.ASRITHAREDDY/OneDrive/Desktop/Documents/ChatGPT/RAG for Pharma 2/pharmareg-xai/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/N.ASRITHAREDDY/OneDrive/Desktop/Documents/ChatGPT/RAG for Pharma 2/pharmareg-xai/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\e2e",
+        "snapshotDir": "C:\\Users\\N.ASRITHAREDDY\\OneDrive\\Desktop\\Documents\\ChatGPT\\RAG for Pharma 2\\pharmareg-xai\\frontend\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "baseURL": "http://127.0.0.1:8010",
+          "headless": true,
+          "launchOptions": {
+            "executablePath": "C:\\Users\\N.ASRITHAREDDY\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1248\\chrome-headless-shell-win64\\chrome-headless-shell.exe"
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workflow.spec.js",
+      "file": "workflow.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "register, inspect real FDA PDF, approve requirement, assess SOP, review finding, download report",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31865,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T15:27:14.541Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "93da89c2ff21c8134e9c-48fdcbbaa5609f01ea47",
+          "file": "workflow.spec.js",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "workspace navigation and mobile layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1885,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T15:27:46.534Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "93da89c2ff21c8134e9c-0f071a431f11dcbf40dc",
+          "file": "workflow.spec.js",
+          "line": 104,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T15:27:14.156Z",
+    "duration": 34877.967000000004,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

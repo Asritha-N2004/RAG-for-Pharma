@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "url": "https://pharmareg-xai.vercel.app",
+  "persisted_turns": 2,
+  "responses": [
+    {
+      "provider": "local-extractive",
+      "evidence_count": 1,
+      "answer": "Retrieved source excerpts are listed below. Local extractive mode does not establish a generated compliance conclusion."
+    },
+    {
+      "provider": "local-extractive",
+      "evidence_count": 1,
+      "answer": "Retrieved source excerpts are listed below. Local extractive mode does not establish a generated compliance conclusion."
+    }
+  ],
+  "limitation": "Cloud local-extractive evidence mode; no neural-model accuracy claim."
+}
