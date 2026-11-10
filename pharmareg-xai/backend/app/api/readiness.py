@@ -23,6 +23,7 @@ def readiness(request:Request,user=Depends(current_user),db=Depends(get_db)):
             client().heartbeat();checks['vector_store']={'status':'VERIFIED','mode':os.getenv('CHROMA_MODE','http')}
         except Exception:checks['vector_store']={'status':'FAILED'}
     else:checks['vector_store']={'status':'VERIFIED','mode':'SQL-backed vectors'}
+    checks['processing']={'status':'CONFIGURED','mode':os.getenv('JOB_MODE','embedded'),'note':'Request-driven jobs resume during status polling and are subject to the function duration limit.' if os.getenv('JOB_MODE')=='inline' else 'Separate worker availability must be checked with the hosting provider.'}
     checks['file_encryption']={'status':'CONFIGURED' if os.getenv('ENCRYPT_STORAGE','false')=='true' else 'NOT_CONFIGURED','scope':'Original documents, CAPA attachments and generated report files; database-volume encryption remains an infrastructure control.'}
     checks['smtp']={'status':'CONFIGURED' if all(os.getenv(k) for k in ['SMTP_HOST','SMTP_FROM']) else 'NOT_CONFIGURED','note':'No test message is sent by this check.'}
     import json

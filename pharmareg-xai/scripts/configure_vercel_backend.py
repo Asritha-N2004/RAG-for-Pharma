@@ -1,5 +1,6 @@
 """Configure only this project's cloud runtime; never print secret values."""
-import json,os,secrets,subprocess
+import argparse,json,os,secrets,subprocess
+parser=argparse.ArgumentParser();parser.add_argument("--job-mode",choices=["inline","worker"],default="inline");args=parser.parse_args()
 from pathlib import Path
 from dotenv import dotenv_values
 root=Path(__file__).resolve().parents[1];workspace=root.parent
@@ -10,7 +11,7 @@ if config_path.exists():values=json.loads(config_path.read_text())
 else:
     values={'SECRET_KEY':secrets.token_hex(48),'STORAGE_ENCRYPTION_KEY':secrets.token_hex(32),'AUDIT_HMAC_KEY':secrets.token_hex(48),'SIGNATURE_HMAC_KEY':secrets.token_hex(48)}
     with os.fdopen(os.open(config_path,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600),'w') as file:json.dump(values,file)
-values.update({'APP_ENV':'production','STORAGE_DIR':'/tmp/pharmareg','ENCRYPT_STORAGE':'true','FILE_STORAGE':'vercel-blob','LLM_PROVIDER':'local-extractive','ALLOW_EXTERNAL_LLM':'false','EMBEDDING_PROVIDER':'hash-local','VECTOR_STORE':'sql','JOB_MODE':'worker','MAX_UPLOAD_SIZE_MB':'4'})
+values.update({'APP_ENV':'production','STORAGE_DIR':'/tmp/pharmareg','ENCRYPT_STORAGE':'true','FILE_STORAGE':'vercel-blob','LLM_PROVIDER':'local-extractive','ALLOW_EXTERNAL_LLM':'false','EMBEDDING_PROVIDER':'hash-local','VECTOR_STORE':'sql','JOB_MODE':args.job_mode,'MAX_UPLOAD_SIZE_MB':'4'})
 for name,value in values.items():
     result=subprocess.run(['node',str(cli),'env','add',name,'--environment','production','--project','pharmareg-xai','--scope','resum-projects','--global-config',str(auth),'--force','--yes','--sensitive' if name.endswith('_KEY') else '--no-sensitive'],input=value,text=True,capture_output=True)
     if result.returncode:raise SystemExit('Failed configuring '+name+'; values withheld.')

@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "url": "https://pharmareg-xai.vercel.app",
+  "readiness": {
+    "checks": {
+      "database": {
+        "status": "VERIFIED",
+        "engine": "postgresql"
+      },
+      "redis": {
+        "status": "NOT_CONFIGURED",
+        "alternative": "Durable SQL queue and local rate limits"
+      },
+      "vector_store": {
+        "status": "VERIFIED",
+        "mode": "SQL-backed vectors"
+      },
+      "processing": {
+        "status": "CONFIGURED",
+        "mode": "inline",
+        "note": "Request-driven jobs resume during status polling and are subject to the function duration limit."
+      },
+      "file_encryption": {
+        "status": "CONFIGURED",
+        "scope": "Original documents, CAPA attachments and generated report files; database-volume encryption remains an infrastructure control."
+      },
+      "smtp": {
+        "status": "NOT_CONFIGURED",
+        "note": "No test message is sent by this check."
+      },
+      "malware_scanner": {
+        "status": "NOT_CONFIGURED",
+        "required": false
+      },
+      "https": {
+        "status": "VERIFIED",
+        "note": "External TLS termination must be verified from the public deployment endpoint."
+      },
+      "oidc": {
+        "status": "NOT_CONFIGURED"
+      },
+      "domain_and_regulatory_validation": {
+        "status": "HUMAN_REVIEW_REQUIRED",
+        "note": "Use the release validation page to record qualified evidence and sign-off. Automated service checks do not certify legal or regulatory suitability."
+      }
+    },
+    "service_failures": [],
+    "production_certified": false
+  },
+  "assessment_id": "be8348bc-0a08-48fd-90ca-8016b0d93354",
+  "findings": 1,
+  "reports": {
+    "pdf": 16333,
+    "docx": 40865,
+    "csv": 2739
+  },
+  "notes": "Synthetic workflow fixture; no domain accuracy or certification claim."
+}

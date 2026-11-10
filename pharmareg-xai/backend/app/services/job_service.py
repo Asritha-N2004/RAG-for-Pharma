@@ -36,6 +36,14 @@ def dispatch(background,db,org_id,task,target_id):
     job=enqueue(db,org_id,task,target_id);db.commit();notify()
     if os.getenv('JOB_MODE','embedded') in {'inline','test-inline'}:background.add_task(execute,job.id)
     return job
+def resume_pending(background,db,org_id,target_id):
+    """Resume already-authorized durable work during polling in request-driven mode."""
+    if os.getenv('JOB_MODE')!='inline':return
+    now=int(time.time())
+    eligible=or_(ProcessingJob.state.in_(['QUEUED','RETRY']),(ProcessingJob.state=='RUNNING') & (ProcessingJob.lease_until<now))
+    identifier=db.scalar(select(ProcessingJob.id).where(ProcessingJob.org_id==org_id,ProcessingJob.target_id==target_id,eligible,ProcessingJob.available_at<=now,ProcessingJob.attempts<ProcessingJob.max_attempts).order_by(ProcessingJob.created_at).limit(1))
+    if identifier:background.add_task(execute,identifier)
+
 def claim(identifier=None):
     now=int(time.time());lease=secrets.token_hex(24)
     with Session() as db:

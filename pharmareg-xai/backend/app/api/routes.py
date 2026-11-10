@@ -17,7 +17,7 @@ from app.services.compliance_service import run_assessment
 from app.services.risk_service import calculate
 from app.services.report_service import generate
 from app.services.evaluation_service import retrieval_metrics
-from app.services.job_service import dispatch
+from app.services.job_service import dispatch,resume_pending
 
 router=APIRouter(prefix='/api')
 def serialize(row):
@@ -167,8 +167,9 @@ def regulations(user=Depends(current_user),db=Depends(get_db)): return documents
 @router.get('/documents/{identifier}')
 @router.get('/regulations/{identifier}')
 @router.get('/documents/{identifier}/status')
-def document(identifier:str,user=Depends(current_user),db=Depends(get_db)):
+def document(identifier:str,background:BackgroundTasks,user=Depends(current_user),db=Depends(get_db)):
     doc=owned(db,Document,identifier,user)
+    resume_pending(background,db,user.org_id,identifier)
     return {**serialize(doc),'chunks':[serialize(c) for c in db.scalars(select(Chunk).where(Chunk.document_id==doc.id))]}
 @router.get('/documents/{identifier}/preview')
 def preview(identifier:str,user=Depends(current_user),db=Depends(get_db)):
@@ -240,7 +241,8 @@ def create_assessment(data:AssessmentInput,user=Depends(current_user),db=Depends
 @router.get('/compliance/assessments')
 def assessments(user=Depends(current_user),db=Depends(get_db)): return listing(db,Assessment,user)
 @router.get('/compliance/assessments/{identifier}')
-def assessment(identifier:str,user=Depends(current_user),db=Depends(get_db)): return serialize(owned(db,Assessment,identifier,user))
+def assessment(identifier:str,background:BackgroundTasks,user=Depends(current_user),db=Depends(get_db)):
+    row=owned(db,Assessment,identifier,user);resume_pending(background,db,user.org_id,identifier);return serialize(row)
 @router.post('/compliance/assessments/{identifier}/run')
 def run(identifier:str,background:BackgroundTasks,user=Depends(current_user),db=Depends(get_db)):
     permit(user,REVIEW_ROLES);row=owned(db,Assessment,identifier,user)

@@ -2,8 +2,8 @@
   "url": "https://pharmareg-xai.vercel.app",
   "team": "resum-projects",
   "project": "pharmareg-xai",
-  "deployment_id": "dpl_J4EDGSJydT7mK9T85cpmcUYunRok",
-  "scope": "Frontend + actual FastAPI + Neon PostgreSQL + private encrypted Blob + ready worker daemon",
+  "deployment_id": "dpl_8bzx8EAnd1fGxNQPoq1eai3YVbFs",
+  "scope": "Frontend + FastAPI + PostgreSQL + private encrypted Blob + request-driven durable jobs",
   "backend_connected": true,
   "pending_notice_removed": true,
   "health_status": 200,
@@ -16,5 +16,8 @@
   "postgres_audit_concurrency_passed": true,
   "cloud_browser_capa_recovery_passed": true,
   "cloud_independent_capa_closure_verified": true,
-  "cloud_browser_pdf_download_verified": true
+  "cloud_browser_pdf_download_verified": true,
+  "processing_mode": "inline",
+  "always_on_daemon": false,
+  "frontend_signup_mfa_browser_passed": true
 }
