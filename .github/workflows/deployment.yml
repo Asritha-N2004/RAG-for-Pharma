@@ -21,19 +21,33 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: pip install httpx==0.28.1
-      - run: docker compose up --build -d --wait --wait-timeout 600
-      - run: python scripts/verify_deployment.py --require-services
+      - name: Build and start healthy services
+        run: docker compose up --build -d --wait --wait-timeout 600
+      - name: Verify deployment workflow
+        run: python scripts/verify_deployment.py --require-services
       - name: Verify worker restart and persistence
         run: |
           docker compose restart worker backend
           docker compose up -d --wait --wait-timeout 180
           python scripts/verify_deployment.py --require-services --output docs/DEPLOYMENT_RESTART_RESULTS.json
-      - if: always()
-        run: docker compose logs --no-color > docs/compose.log
+      - name: Collect service diagnostics
+        if: always()
+        run: |
+          docker compose ps --all > docs/compose-status.txt
+          docker compose logs --no-color > docs/compose.log
+          containers=$(docker compose ps --all --quiet)
+          if [ -n "$containers" ]; then
+            docker inspect --format '{{.Name}} {{json .State.Health}}' $containers > docs/compose-health.txt
+          fi
       - if: always()
         uses: actions/upload-artifact@v4
         with:
           name: deployment-evidence
-          path: pharmareg-xai/docs/*RESULTS.json
+          path: |
+            pharmareg-xai/docs/DEPLOYMENT_RESULTS.json
+            pharmareg-xai/docs/DEPLOYMENT_RESTART_RESULTS.json
+            pharmareg-xai/docs/compose.log
+            pharmareg-xai/docs/compose-status.txt
+            pharmareg-xai/docs/compose-health.txt
       - if: always()
         run: docker compose down -v
